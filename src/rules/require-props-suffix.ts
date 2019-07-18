@@ -51,7 +51,7 @@ export default util.createRule({
 
           if (
             !isSuffixedWithProps(
-              node.parent.typeParameters.params[0].typeName.name,
+              node.parent.typeParameters.params[0].typeName.name
             )
           ) {
             return reportError(node);

@@ -1,25 +1,25 @@
-import { TSESLint } from '@typescript-eslint/experimental-utils';
-import chalk from 'chalk';
-import fs from 'fs';
-import marked from 'marked';
-import path from 'path';
-import { logRule } from '../log';
+import { TSESLint } from "@typescript-eslint/experimental-utils";
+import chalk from "chalk";
+import fs from "fs";
+import marked from "marked";
+import path from "path";
+import { logRule } from "../log";
 
 function validateTableRules(
   rules: Record<string, Readonly<TSESLint.RuleModule<any, any, any>>>,
-  rulesTable: marked.Tokens.Table,
+  rulesTable: marked.Tokens.Table
 ): boolean {
   let hasErrors = false;
 
   Object.entries(rules).forEach(([ruleName, rule]) => {
     const row = rulesTable.cells.find(row =>
-      row[0].includes(`/${ruleName}.md`),
+      row[0].includes(`/${ruleName}.md`)
     );
 
     if (!row) {
       if (!rule.meta.deprecated) {
         hasErrors = true;
-        logRule(false, ruleName, 'Missing entry in table');
+        logRule(false, ruleName, "Missing entry in table");
         return;
       }
 
@@ -31,7 +31,7 @@ function validateTableRules(
       logRule(
         false,
         ruleName,
-        'Rule is marked as deprecated, should not have an entry in the table',
+        "Rule is marked as deprecated, should not have an entry in the table"
       );
       return;
     }
@@ -49,21 +49,21 @@ function validateTableRules(
       value: boolean,
       cell: string,
       trueString: string,
-      columnLabel: string,
+      columnLabel: string
     ): void {
       if (value && cell !== trueString) {
         errors.push(
           `Rule ${chalk.red(
-            'not',
-          )} marked as ${columnLabel} when it ${chalk.bold('should')} be`,
+            "not"
+          )} marked as ${columnLabel} when it ${chalk.bold("should")} be`
         );
       }
 
-      if (!value && cell !== '') {
+      if (!value && cell !== "") {
         errors.push(
           `Rule ${chalk.red(
-            'was',
-          )} marked as ${columnLabel} when it ${chalk.bold('should not')} be`,
+            "was"
+          )} marked as ${columnLabel} when it ${chalk.bold("should not")} be`
         );
       }
     }
@@ -73,44 +73,44 @@ function validateTableRules(
       errors.push(
         `Link is invalid.`,
         `    Expected: ${chalk.underline(expectedLink)}`,
-        `    Received: ${chalk.underline(rowLink)}`,
+        `    Received: ${chalk.underline(rowLink)}`
       );
     }
 
     const expectedDescription = rule.meta.docs.description;
     if (rowDescription !== expectedDescription) {
       errors.push(
-        'Description does not match the rule metadata.',
+        "Description does not match the rule metadata.",
         `    Expected: ${chalk.underline(expectedDescription)}`,
-        `    Received: ${chalk.underline(rowDescription)}`,
+        `    Received: ${chalk.underline(rowDescription)}`
       );
     }
 
     validateTableBoolean(
       !!rule.meta.docs.recommended,
       rowIsRecommended,
-      ':heavy_check_mark:',
-      'recommended',
+      ":heavy_check_mark:",
+      "recommended"
     );
 
     validateTableBoolean(
       rule.meta.fixable !== undefined,
       rowIsFixable,
-      ':wrench:',
-      'fixable',
+      ":wrench:",
+      "fixable"
     );
 
     // quick-and-dirty check to see if it uses parserServices
     // not perfect but should be good enough
     const ruleFileContents = fs.readFileSync(
-      path.resolve(__dirname, `../../src/rules/${ruleName}.ts`),
+      path.resolve(__dirname, `../../src/rules/${ruleName}.ts`)
     );
-    const usesTypeInformation = ruleFileContents.includes('getParserServices');
+    const usesTypeInformation = ruleFileContents.includes("getParserServices");
     validateTableBoolean(
       usesTypeInformation,
       rowNeedsTypeInfo,
-      ':thought_balloon:',
-      'requiring type information',
+      ":thought_balloon:",
+      "requiring type information"
     );
 
     hasErrors = hasErrors || errors.length > 0;
