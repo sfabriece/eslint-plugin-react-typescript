@@ -35,7 +35,7 @@
     "format": "prettier --write \"./**/*.{ts,js,json,md}\" --ignore-path ../../.prettierignore",
     "generate:configs": "ts-node --files tools/generate-configs.ts",
     "prebuild": "npm run clean",
-    "test": "jest tests/rules/require-component-props-interface.test.ts",
+    "test": "jest",
     "test-cov": "jest --coverage",
     "typecheck": "tsc --noEmit"
   },
