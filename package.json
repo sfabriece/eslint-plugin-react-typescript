@@ -1,0 +1,69 @@
+{
+  "name": "eslint-plugin-react-interface-props",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "typescript"
+  ],
+  "engines": {
+    "node": "^6.14.0 || ^8.10.0 || >=9.10.0"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": {
+    "url": ""
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check:docs": "ts-node --files ./tools/validate-docs/index.ts",
+    "check:configs": "ts-node --files ./tools/validate-configs/index.ts",
+    "clean": "rimraf dist/",
+    "format": "prettier --write \"./**/*.{ts,js,json,md}\" --ignore-path ../../.prettierignore",
+    "generate:configs": "ts-node --files tools/generate-configs.ts",
+    "prebuild": "npm run clean",
+    "test": "jest tests/rules/require-component-props-interface.test.ts",
+    "test-cov": "jest --coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@typescript-eslint/experimental-utils": "1.12.0",
+    "eslint-utils": "^1.4.0",
+    "functional-red-black-tree": "^1.0.1",
+    "regexpp": "^2.0.1",
+    "tsutils": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.15",
+    "@types/json-schema": "^7.0.3",
+    "@types/marked": "^0.6.5",
+    "@typescript-eslint/parser": "1.12.0",
+    "chalk": "^2.4.2",
+    "eslint": "5.16.0",
+    "husky": "3.0.0",
+    "jest": "24.8.0",
+    "lint-staged": "9.2.0",
+    "marked": "^0.7.0",
+    "prettier": "1.18.2",
+    "ts-jest": "24.0.2",
+    "ts-node": "8.3.0",
+    "typescript": "3.5.3"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.0.0"
+  }
+}

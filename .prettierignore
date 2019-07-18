@@ -1,0 +1,12 @@
+**/tests/fixtures/**/*
+**/dist
+**/coverage
+**/shared-fixtures
+**/tests/integration/fixtures/**/*
+**/.vscode
+**/.nyc_output
+.github
+packages/eslint-plugin/src/configs/*.json
+
+# Ignore CHANGELOG.md files to avoid issues with automated release job
+CHANGELOG.md
