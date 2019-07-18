@@ -12,7 +12,7 @@ export default util.createRule({
       recommended: "error",
     },
     messages: {
-      requireSuffix: "prop interface names be suffixed with `Props`",
+      requireSuffix: "Prop interfaces must be suffixed with `Props`",
     },
     schema: [],
   },
@@ -31,29 +31,30 @@ export default util.createRule({
       return name.length >= minLength && name.endsWith("Props");
     }
 
+    function reportError(node: any) {
+      context.report({
+        node,
+        messageId: "requireSuffix",
+      });
+    }
+
     return {
       TSQualifiedName(node: any): void {
-        if (node.left.name === "React" && node.right.name === "FC") {
-          if (!node.parent.typeParameters) {
-            context.report({
-              node,
-              messageId: "requireSuffix",
-            });
-
-            return;
+        if (
+          node.left.name === "React" &&
+          node.right.name === "FC" &&
+          node.parent.typeParameters
+        ) {
+          if (node.parent.typeParameters.params.length === 0) {
+            return reportError(node);
           }
 
           if (
             !isSuffixedWithProps(
-              node.parent.typeParameters.params[0].typeName.name
+              node.parent.typeParameters.params[0].typeName.name,
             )
           ) {
-            context.report({
-              node,
-              messageId: "requireSuffix",
-            });
-
-            return;
+            return reportError(node);
           }
         }
       },

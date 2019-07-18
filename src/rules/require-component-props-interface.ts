@@ -12,16 +12,12 @@ export default util.createRule({
       recommended: "error",
     },
     messages: {
-      requireComponentProps: "props interface to be provided to a component",
+      requireComponentProps:
+        "Props interfaces must be provided to a react component",
     },
     schema: [],
   },
   create(context: any) {
-    /**
-     * Checks if a string is suffixed with "Props".
-     * @param name The string to check
-     */
-
     return {
       TSQualifiedName(node: any): void {
         if (node.left.name === "React" && node.right.name === "FC") {

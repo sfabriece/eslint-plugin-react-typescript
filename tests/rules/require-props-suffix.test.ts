@@ -12,6 +12,7 @@ const ruleTester = new RuleTester({
 
 ruleTester.run("require-props-suffix", rule, {
   valid: [
+    "const App: React.FC = ()=> null;",
     "const App: React.FC<IAnimalProps> = ()=> null;",
     "const App: React.FC<AnimalProps> = ()=> null;",
     "const App: React.FC<AnimalProps> = ()=> {return (<div></div>)}",
@@ -50,7 +51,7 @@ ruleTester.run("require-props-suffix", rule, {
       ],
     },
     {
-      code: "const App: React.FC = ()=> null;",
+      code: "const App: React.FC<> = ()=> null;",
       errors: [
         {
           messageId: "requireSuffix",
