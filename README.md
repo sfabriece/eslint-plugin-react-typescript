@@ -24,28 +24,20 @@ Add `react-interface-props` to the plugins section of your `.eslintrc` configura
 
 ```json
 {
-    "plugins": [
-        "react-interface-props"
-    ]
+  "plugins": ["react-interface-props"]
 }
 ```
-
 
 Then configure the rules you want to use under the rules section.
 
 ```json
 {
-    "rules": {
-        "react-interface-props/rule-name": 2
-    }
+  "rules": {
+    "react-interface-props/rule-name": 2
+  }
 }
 ```
 
 ## Supported Rules
 
-* Fill in provided rules here
-
-
-
-
-
+- Fill in provided rules here
