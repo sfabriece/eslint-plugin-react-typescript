@@ -1,6 +1,6 @@
 {
   "name": "@fabriece/eslint-plugin-react-typescript",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "keywords": [
     "eslint",
@@ -41,6 +41,7 @@
     "pre-push": "yarn format-check",
     "postinstall": "yarn build",
     "prebuild": "yarn clean",
+    "prepublishOnly": "yarn format-check && yarn test",
     "test": "jest",
     "test-cov": "jest --coverage",
     "typecheck": "tsc --noEmit"
