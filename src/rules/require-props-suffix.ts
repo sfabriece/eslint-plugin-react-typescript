@@ -43,7 +43,8 @@ export default util.createRule({
         if (
           node.left.name === "React" &&
           node.right.name === "FC" &&
-          node.parent.typeParameters
+          node.parent.typeParameters &&
+          node.parent.typeParameters.params[0].typeName
         ) {
           if (node.parent.typeParameters.params.length === 0) {
             return reportError(node);
