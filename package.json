@@ -43,7 +43,10 @@
     "prepublishOnly": "yarn format-check && yarn test",
     "test": "jest",
     "test-cov": "jest --coverage",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "postversion": "npm publish --tag=legacy",
+    "postpublish": "git push origin --all; git push origin --tags",
+    "preversion": "yarn test"
   },
   "dependencies": {
     "@typescript-eslint/experimental-utils": "2.1.0",
