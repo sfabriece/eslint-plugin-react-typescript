@@ -46,7 +46,7 @@
     "typecheck": "tsc --noEmit",
     "postversion": "npm publish --tag=legacy",
     "postpublish": "git push origin --all; git push origin --tags",
-    "preversion": "yarn test"
+    "preversion": "yarn test && yarn build"
   },
   "dependencies": {
     "@typescript-eslint/experimental-utils": "2.1.0",
