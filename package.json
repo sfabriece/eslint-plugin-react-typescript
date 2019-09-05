@@ -1,6 +1,6 @@
 {
   "name": "@fabriece/eslint-plugin-react-typescript",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Checks that React Component definitions have an interface",
   "keywords": [
     "eslint",
